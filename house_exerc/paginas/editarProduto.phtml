@@ -1,0 +1,29 @@
+<?php
+$id = $_GET['id'];
+
+$produto = file(dirname(__DIR__).'/produtos.csv');
+
+$produtosEditar = explode(';',$produto[$id]);
+
+if(!empty($_POST)){
+    $produtosEditar[0] = $_POST['imei'];
+    $produtosEditar[1] = $_POST['chip'];
+    $produtosEditar[2] = $_POST['modelo'];
+    $produtosEditar[3] = $_POST['estado'];
+
+    $produto[$id] = implode(';', $produtosEditar);
+
+    unlink(dirname(__DIR__).'/produtos.csv');
+
+    $newProduto = fopen(dirname(__DIR__).'/produtos.csv','a+');
+        foreach($produto as $editProduto){
+            fwrite($newProduto, $editProduto);
+        }
+        fclose($newProduto);
+
+    echo "  <div class='alert alert-success'>
+                 Pronto !!! Produto Cadastrado
+            </div>";    
+}
+
+include dirname(__DIR__).'/paginas/formEditProduto.phtml';

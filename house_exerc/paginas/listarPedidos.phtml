@@ -1,0 +1,84 @@
+<?php
+    $vinculados = file(dirname(__DIR__).'/vinculados.csv');
+?>
+
+<h3 class=text-center>Rastreadores Vinculados</h3>
+<!-- <table  id="table_id" class=" table table-hover table-striped"> -->
+<table  id="table_id" class=" display" style="width:100%">
+
+
+    <thead >
+    
+        <tr>
+            <th>Cliente</th>
+            <th>Veiculo</th>
+            <th>Modulo Rastreador</th>
+            <th>Motivo</th>
+            <th>Observação</th>
+            <th>Foto</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            foreach($vinculados as $id => $cadaVinculados)
+            {
+                $cadaVinculado = explode(';',$cadaVinculados);
+               
+                if($cadaVinculado[3]==1){
+                    $cadaVinculado[3]='Novo';
+                }else if($cadaVinculado[3]==2){
+                    $cadaVinculado[3]='Usado';
+                }
+                echo "
+                    <tr>
+                        <td>$cadaVinculado[0]</td>
+                        <td>$cadaVinculado[1]</td>
+                        <td>$cadaVinculado[2]</td>
+                        <td>$cadaVinculado[3]</td>
+                        <td>$cadaVinculado[4]</td>
+                        <td><a onclick=abrirFoto(this) data-image='$cadaVinculado[5]' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
+                                <img width='50px' src='{$cadaVinculado[5]}'>
+                                 
+                            </a>
+                        </td>
+                        <td>
+                            <a href='/editar-pedido?id={$id}' class='btn btn-outline-warning'>Editar</a>
+                            <a href='/excluir-pedido?id={$id}' class='btn btn-outline-danger'>Excluir</a>
+                        </td>
+                    </tr>
+                ";
+            }
+
+           
+        ?>
+
+    </tbody>
+</table>
+
+<script>
+    function abrirFoto(elemento){
+        foto.setAttribute('src',elemento.getAttribute('data-image'));
+    }
+</script>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="abrirFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img width=100% alt="imagem aqui" id="foto"  src="">
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+php-S localhost:8000 -t aula01
+
+php do jeito certo - site
+
+php debug
+
+instalar extensão php dump
+
+photopea
+
+sentry - para visualizar erros
+
+php-cs-fixer
+
+php-cs-fixer roles

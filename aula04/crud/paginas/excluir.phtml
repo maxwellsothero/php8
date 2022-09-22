@@ -1,0 +1,19 @@
+<?php
+$id = $_GET['id'];
+
+$arquivos =  file(dirname(__DIR__).'/bebidas.csv');
+
+//excluindo a linha especifica do array temporario
+unset($arquivos[$id]);
+//excluiu o arquivo
+unlink(dirname(__DIR__).'/bebidas.csv');
+
+$novoArquivo = fopen(dirname(__DIR__).'/bebidas.csv','a+');
+foreach($arquivos as $cadaLinha){
+    fwrite($novoArquivo,$cadaLinha);
+}
+fclose($novoArquivo);
+
+echo "<div class='alert alert-success'>
+    Pronto!! Bebida Excluida
+</div>";

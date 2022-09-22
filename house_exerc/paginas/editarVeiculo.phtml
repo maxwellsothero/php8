@@ -1,0 +1,29 @@
+<?php
+$id = $_GET['id'];
+
+$veiculos = file(dirname(__DIR__).'/veiculo.csv');
+
+$veiculosEditar = explode(';',$veiculos[$id]);
+
+if(!empty($_POST)){
+    $veiculosEditar[0] = $_POST['placa'];
+    $veiculosEditar[1] = $_POST['renavam'];
+    $veiculosEditar[2] = $_POST['modelo'];
+    $veiculosEditar[3] = $_POST['estado'];
+
+    $veiculos[$id] = implode(';', $veiculosEditar);
+
+    unlink(dirname(__DIR__).'/veiculo.csv');
+
+    $newVeiculo = fopen(dirname(__DIR__).'/veiculo.csv','a+');
+        foreach($veiculos as $editVeiculos){
+            fwrite($newVeiculo, $editVeiculos);
+        }
+        fclose($newVeiculo);
+
+    echo "  <div class='alert alert-success'>
+                 Pronto !!! Produto Cadastrado
+            </div>";    
+}
+
+include dirname(__DIR__).'/paginas/formEditVeiculo.phtml';

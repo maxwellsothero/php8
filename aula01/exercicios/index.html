@@ -1,0 +1,18 @@
+<form onsubmit="validar()" action="validar.php" method="post">
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" name="nome">
+    <br>
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" name="senha">
+    <br>
+    <button>Enviar</button>
+</form>
+
+<script>
+    function validar(){
+        if(nome.value === ''){
+            nome.style.border = '1px solid red';
+            event.preventDefault();
+        }
+    }
+</script>

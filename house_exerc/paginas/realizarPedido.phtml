@@ -1,0 +1,109 @@
+<?php
+    if(!empty($_POST)){
+        $foto ='img/'.$_FILES['foto']['name'];
+        move_uploaded_file(
+            $_FILES['foto']['tmp_name'],
+            dirname(__DIR__).'/'.$foto
+        );
+
+        extract($_POST);
+        $arquivo = fopen(dirname(__DIR__).'/vinculados.csv','a+');
+        fwrite($arquivo,"{$cliente};{$veiculo};{$rastreador};{$categoria};{$observacao};{$foto}".PHP_EOL);
+        fclose($arquivo);
+        echo "<div class='alert alert-success'>
+                <strong>Cliente Cadastrado</strong> Com Sucesso !!!
+        </div>";
+    }
+
+    
+    $clientes = file(dirname(__DIR__).'/clientes.csv');
+   
+
+    $veiculos = file(dirname(__DIR__).'/veiculo.csv');
+    
+
+    $produtos = file(dirname(__DIR__).'/produtos.csv');
+?>
+
+<h3 class="text-center">Vincular Rastreador</h3>
+<hr>
+    <section class="row ">
+
+        <div class="col-md-6 align-self-center">
+            <img src="img/control_panel.svg" width="90%" alt="">
+        </div>
+
+        <div class="col-md-6">
+            <article class="card card-body text-bg-primary">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                               
+                                <label for='cliente' class='form-label'>Cliente:</label>
+                                <select name='cliente' class='form-select mb-1' aria-label='Default select example'>
+                                    <option selected>Selecione a Cliente</option>
+
+                                                <?php
+                                                    foreach($clientes as $id => $cadaClientes)
+                                                    {
+                                                        $cadaCliente = explode(';',$cadaClientes);  
+                                                                                    
+                                                        echo "    
+                                                <option >$cadaCliente[0]</option>                                                                                                      
+                                                    ";
+                                            };
+                                        ?>
+                                    </select>  
+
+                            <label for='veiculo' class='form-label'>Veiculo</label>
+                                <select name='veiculo' class='form-select mb-1' aria-label='Default select example'>
+                                    <option selected>Selecione a Veiculo</option>
+
+                                    <?php
+                                        foreach($veiculos as $id => $cadaveiculos)
+                                        {
+                                            $cadaveiculo = explode(';',$cadaveiculos);        
+                                                                 
+                                            echo "    
+                                           
+                                    <option >$cadaveiculo[0]</option>                                                                                                      
+                                         ";
+                                         
+                                };
+                            ?>
+                            </select>  
+                            
+                            <label for='rastreador' class='form-label'>Modulo Rastreador</label>
+                                <select name='rastreador' class='form-select mb-1' aria-label='Default select example'>
+                                    <option selected>Selecione seu Rastreador</option>
+
+                                    <?php
+                                        foreach($produtos as $id => $cadaProdutos)
+                                        {
+                                            $cadaProduto = explode(';',$cadaProdutos);                                 
+                                            echo "    
+                                    <option >$cadaProduto[0]</option>                                                                                                      
+                                         ";
+                                };
+                            ?>
+                            </select>  
+
+                            <label for="categoria" class="form-label ">Motivo</label>
+                                <select name="categoria" class="form-select mb-1" aria-label="Default select example">
+                                    <option selected>Selecione a Tipo</option>
+                                    <option value="1">Instalação</option>
+                                    <option value="2">Revisão</option>
+                                    <option value="3">Remoção</option>
+                                </select>
+                                <label for="observacao" class="form-label">Observação</label>
+                                    <input name="observacao" type="text" class="form-control mb-3"  placeholder="Observações">
+
+                            <label  for="foto">Foto</label>
+                                    <input name="foto" type="file" class="form-control mb-3">    
+
+                            <div class="d-grid">
+                                    <button class="btn btn-outline-light btn-lg ">Vincular Rastreador</button>
+                            </div>
+                </form>
+            </article>
+        </div>
+    </section>

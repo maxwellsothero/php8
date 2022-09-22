@@ -1,0 +1,20 @@
+<?php
+$id = $_GET['id'];
+
+$arquivos = file(dirname(__DIR__).'/clientes.csv');
+
+//exclui a linha desejada
+unset($arquivos[$id]);
+
+unlink(dirname(__DIR__).'/clientes.csv');
+
+$novoArquivo =  fopen(dirname(__DIR__).'/clientes.csv','a+');
+
+foreach($arquivos as $cadaArquivo){
+    fwrite($novoArquivo,$cadaArquivo);
+}
+fclose($novoArquivo);
+
+echo "<div class='alert alert-success'>
+    Pronto!! Usuario Excluido !!!
+</div>";

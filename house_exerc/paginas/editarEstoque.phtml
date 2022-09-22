@@ -1,0 +1,30 @@
+<?php
+$id = $_GET['id'];
+
+$estoque = file(dirname(__DIR__).'/estoque.csv');
+
+$estoqueEditar = explode(';',$estoque[$id]);
+
+if(!empty($_POST)){
+    $estoqueEditar[0] = $_POST['nome'];
+    $estoqueEditar[1] = $_POST['modelo'];
+    $estoqueEditar[2] = $_POST['fabricante'];
+    $estoqueEditar[3] = $_POST['categoria'];
+    $estoqueEditar[4] = $_POST['quantidade'];
+
+    $estoque[$id] = implode(';', $estoqueEditar);
+
+    unlink(dirname(__DIR__).'/estoque.csv');
+
+    $newEstoque = fopen(dirname(__DIR__).'/estoque.csv','a+');
+        foreach($estoque as $estoqueEdit){
+            fwrite($newEstoque, $estoqueEdit);
+        }
+        fclose($newEstoque);
+
+    echo "  <div class='alert alert-success'>
+                 Pronto !!! Produto Cadastrado
+            </div>";    
+}
+
+include dirname(__DIR__).'/paginas/formEditEstoque.phtml';

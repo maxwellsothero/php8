@@ -1,0 +1,30 @@
+<?php
+$id = $_GET['id'];
+
+$bebidas =  file(dirname(__DIR__).'/bebidas.csv');
+
+$bebidaParaEditar = explode(';', $bebidas[$id]);
+    if(!empty($_POST)){
+        $bebidaParaEditar[0] = $_POST['titulo'];
+        $bebidaParaEditar[1] = $_POST['descricao'];
+        $bebidaParaEditar[2] = $_POST['preco'];
+        $bebidaParaEditar[3] = $_POST['quantidade'];
+        
+        $bebidas[$id] = implode(';',$bebidaParaEditar);
+
+        //excluindo arquivo
+        unlink(dirname(__DIR__).'/bebidas.csv');
+
+        $novoArquivo = fopen(dirname(__DIR__).'/bebidas.csv','a+');
+        foreach($bebidas as $cadaBebida){
+            fwrite($novoArquivo,$cadaBebida);
+}
+fclose($novoArquivo);
+
+echo "<div class='alert alert-success'>
+    Pronto!! Bebida Cadastrada
+</div>";
+    }
+
+include dirname(__DIR__).'/paginas/form_edit.phtml';
+

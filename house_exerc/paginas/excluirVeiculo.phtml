@@ -1,0 +1,19 @@
+<?php
+$id = $_GET['id'];
+
+$veiculo = file(dirname(__DIR__).'/veiculo.csv');
+
+//excluir a linha desejada
+unset($veiculo[$id]);
+
+unlink(dirname(__DIR__).'/veiculo.csv');
+
+$novoVeiculo = fopen(dirname(__DIR__).'/veiculo.csv','a+');
+    foreach($veiculo as $cadaVeiculo){
+            fwrite($novoVeiculo,$cadaVeiculo);
+    }
+fclose($novoVeiculo);
+
+echo "<div class='alert alert-success'>
+    Pronto!! Usuario Excluido !!!
+</div>";

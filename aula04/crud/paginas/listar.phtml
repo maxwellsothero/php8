@@ -1,0 +1,69 @@
+<?php
+    $bebidas = file(dirname(__DIR__).'/bebidas.csv');
+?>
+
+<h1>Pagina de Listagem</h1>
+
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Foto</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach($bebidas as $id => $cadaLinha){
+            $cadaBebida = explode(';',$cadaLinha);
+            echo "
+            <tr>
+                <td>{$cadaBebida[0]}</td>
+                <td>{$cadaBebida[1]}</td>
+                <td>{$cadaBebida[2]}</td>
+                <td>{$cadaBebida[3]}</td>
+                <td><a onclick=abrirFoto(this) data-image='$cadaBebida[4]' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
+                    <img width='50px' src='{$cadaBebida[4]}'>
+                    </a>
+                </td>
+                <td>
+                    <a href='/editar-bebida?id={$id}' class='btn btn-primary'>Editar</a>
+                    <a href='/excluir-bebida?id={$id}' class='btn btn-danger'>remover</a>
+                </td>
+            </tr>
+            ";
+        }
+
+        ?>
+
+        
+    </tbody>
+</table>
+
+<script>
+    function abrirFoto(elemento){
+        foto.setAttribute('src',elemento.getAttribute('data-image'));
+    }
+</script>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="abrirFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img width=100% alt="imagem aqui" id="foto"  src="">
+      </div>
+      
+    </div>
+  </div>
+</div>

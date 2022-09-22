@@ -1,0 +1,85 @@
+<h3 class="text-center">Editar Rastreador Vinculado</h3>
+<hr>
+    <section class="row">
+
+        <div class="col-md-6 align-self-center">
+            <img src="img/control_panel.svg" width="90%" alt="">
+        </div>
+
+        <div class="col-md-6">
+            <article class="card card-body text-bg-primary">
+                <form action="" method="post" enctype="multipart/form-data">
+                        
+                                                              
+                            <label for='cliente' class='form-label'>Cliente:</label>
+                                <select name='cliente' class='form-select mb-1' aria-label='Default select example'>
+                                    <option selected><?=$vincularEditado[0];?></option>
+
+                                            <?php
+                                                foreach($clientes as $id => $cadaClientes)
+                                                {
+                                                    $cadaCliente = explode(';',$cadaClientes);  
+                                                                                
+                                                    echo "    
+                                    <option >$cadaCliente[0]</option>                                                                                                      
+                                                            ";
+                                                    };
+                                            ?>
+                            </select>  
+
+                           
+                            <label for='veiculo' class='form-label'>Veiculo</label>
+                                <select name='veiculo' class='form-select mb-1' aria-label='Default select example'>
+                                    <option selected><?=$vincularEditado[1];?></option>
+
+                                    <?php
+                                        foreach($veiculos as $id => $cadaveiculos)
+                                        {
+                                            $cadaveiculo = explode(';',$cadaveiculos);        
+                                                                 
+                                            echo "    
+                                           
+                                    <option >$cadaveiculo[0]</option>                                                                                                      
+                                         ";
+                                         
+                                };
+                            ?>
+                            </select> 
+                         
+                            <label for='rastreador' class='form-label'>Modulo Rastreador</label>
+                                <select name='rastreador' class='form-select mb-1' aria-label='Default select example'>
+                                    <option selected><?=$vincularEditado[2];?></option>
+
+                                    <?php
+                                        foreach($produtos as $id => $cadaProdutos)
+                                        {
+                                            $cadaProduto = explode(';',$cadaProdutos);                                 
+                                            echo "    
+                                    <option >$cadaProduto[0]</option>                                                                                                      
+                                         ";
+                                };
+                            ?>
+                            </select>      
+
+                            <label for="categoria" class="form-label">Motivo</label>
+                                <select name="categoria" class="form-select" aria-label="Default select example">
+
+                                  
+
+                                    <option selected><?= $vincularEditado[3];?></option>
+                                    <option >Novo</option>
+                                    <option >Usado</option>                                    
+                                </select>
+                                <label for="observacao" class="form-label">Observação</label>
+                                    <input name="observacao" type="text" class="form-control mb-3"  value="<?=$vincularEditado[4];?>">
+                            <label  for="foto">Foto</label>
+                                    <input name="foto" type="file" class="form-control mb-3"">    
+
+                            <div class="d-grid">
+                                    <button class="btn btn-outline-light btn-lg ">Atualiza Produto</button>
+                            </div>
+                </form>
+            </article>
+        </div>
+    </section>
+

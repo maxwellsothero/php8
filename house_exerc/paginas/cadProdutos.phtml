@@ -1,0 +1,53 @@
+<?php
+    if(!empty($_POST)){
+        $foto ='img/'.$_FILES['foto']['name'];
+        move_uploaded_file(
+            $_FILES['foto']['tmp_name'],
+            dirname(__DIR__).'/'.$foto
+        );
+
+        extract($_POST);
+        $arquivo = fopen(dirname(__DIR__).'/produtos.csv','a+');
+        fwrite($arquivo,"{$imei};{$chip};{$modelo};{$estado};{$foto}".PHP_EOL);
+        fclose($arquivo);
+        echo "<div class='alert alert-success'>
+                <strong>Cliente Cadastrado</strong> Com Sucesso !!!
+        </div>";
+    }
+?>
+
+<h3 class="text-center">Cadastro de Rastreadores</h3>
+<hr>
+    <section class="row">
+
+        <div class="col-md-6 align-self-center">
+            <img src="img/control_panel.svg" width="90%" alt="">
+        </div>
+
+        <div class="col-md-6">
+            <article class="card card-body text-bg-primary">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                            <label for="imei" class="form-label">Imei</label>
+                                    <input name="imei" type="text" class="form-control mb-3"  placeholder="Nome do produto">
+                            <label for="chip" class="form-label">Chip</label>
+                                    <input name="chip" type="text" class="form-control mb-3"  placeholder="Modelo do Produto">
+                            <label for="modelo" class="form-label">Modelo</label>
+                                    <input name="modelo" type="text" class="form-control mb-3"  placeholder="Digite o Fabricante">
+                            <label for="estado" class="form-label">Estado:</label>
+                                <select name="estado" class="form-select" aria-label="Default select example">
+                                    <option selected>Selecione a Estado</option>
+                                    <option value="1">Novo</option>
+                                    <option value="2">Usado</option>
+                                    <option value="3">Em Manuteção</option>
+                                </select>
+                            <label  for="foto">Foto</label>
+                                    <input name="foto" type="file" class="form-control mb-3"">    
+
+                            <div class="d-grid">
+                                    <button class="btn btn-outline-light btn-lg ">Cadastrar Rastreador</button>
+                            </div>
+                </form>
+            </article>
+        </div>
+    </section>

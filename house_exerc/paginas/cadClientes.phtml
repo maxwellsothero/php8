@@ -1,0 +1,53 @@
+<?php
+    if(!empty($_POST)){
+        $foto ='img/'.$_FILES['foto']['name'];
+        move_uploaded_file(
+            $_FILES['foto']['tmp_name'],
+            dirname(__DIR__).'/'.$foto
+        );
+
+        extract($_POST);
+        $arquivo = fopen(dirname(__DIR__).'/clientes.csv','a+');
+        fwrite($arquivo,"{$nome};{$idade};{$telefone};{$sexo};{$foto}".PHP_EOL);
+        fclose($arquivo);
+        echo "<div class='alert alert-success'>
+                <strong>Cliente Cadastrado</strong> Com Sucesso !!!
+        </div>";
+    }
+?>
+
+<h1 class="text-center">Cadastro de Clientes</h1>
+<hr>
+    <section class="row">
+
+        <div class="col-md-6 align-self-center text-center ">
+            <img src="img/control_panel.svg" width="50%" alt="">
+        </div>
+
+        <div class="col-md-6">
+            <article class="card card-body text-bg-primary">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                            <label for="nome" class="form-label">Nome</label>
+                                    <input name="nome" type="text" class="form-control mb-3"  placeholder="Digite seu nome">
+                            <label for="idade" class="form-label">Idade:</label>
+                                    <input name="idade" type="text" class="form-control mb-3"  placeholder="Digite sua idade">
+                            <label for="telefone" class="form-label">Telefone:</label>
+                                    <input name="telefone" type="text" class="form-control mb-3"  placeholder="Digite seu Telefone">
+                            <label for="sexo" class="form-label">Sexo:</label>
+                                <select name="sexo" class="form-select" aria-label="Default select example">
+                                    <option selected>Selecione seu Sexo</option>
+                                    <option value="1">Homem</option>
+                                    <option value="2">Mulher</option>
+                                    <option value="3">LGBTQIA+</option>
+                                </select>
+                            <label  for="foto">Foto</label>
+                                    <input name="foto" type="file" class="form-control mb-3"">    
+
+                            <div class="d-grid">
+                                    <button class="btn btn-outline-light btn-lg ">Salvar</button>
+                            </div>
+                </form>
+            </article>
+        </div>
+    </section>

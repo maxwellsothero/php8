@@ -1,0 +1,34 @@
+<?php
+
+
+$id = $_GET['id'];
+
+$clienteEdit =  file(dirname(__DIR__).'/clientes.csv');
+
+$clientesParaEditar = explode(';', $clienteEdit[$id]);
+
+
+if(!empty($_POST)){
+    $clientesParaEditar[0] = $_POST['nome'];
+    $clientesParaEditar[1] = $_POST['idade'];
+    $clientesParaEditar[2] = $_POST['telefone'];
+    $clientesParaEditar[3] = $_POST['sexo'];
+
+    $clienteEdit[$id] = implode(';',$clientesParaEditar);
+
+    unlink(dirname(__DIR__).'/clientes.csv');
+
+    $newCliente = fopen(dirname(__DIR__).'/clientes.csv','a+');
+        foreach($clienteEdit as $editCliente){
+            fwrite($newCliente,$editCliente);
+        }
+    fclose($newCliente);
+
+    echo "<div class='alert alert-success'>
+    Pronto!! Cliente Editado Com Sucesso !!!
+         </div>";        
+}
+
+include dirname(__DIR__).'/paginas/formEditCliente.phtml';
+
+

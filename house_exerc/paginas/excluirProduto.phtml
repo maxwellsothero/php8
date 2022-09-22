@@ -1,0 +1,19 @@
+<?php
+$id = $_GET['id'];
+
+$produtos = file(dirname(__DIR__).'/produtos.csv');
+
+//excluir a linha desejada
+unset($produtos[$id]);
+
+unlink(dirname(__DIR__).'/produtos.csv');
+
+$novoProduto = fopen(dirname(__DIR__).'/produtos.csv','a+');
+    foreach($produtos as $cadaProduto){
+            fwrite($novoProduto,$cadaProduto);
+    }
+fclose($novoProduto);
+
+echo "<div class='alert alert-success'>
+    Pronto!! Usuario Excluido !!!
+</div>";

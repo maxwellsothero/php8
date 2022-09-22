@@ -1,0 +1,46 @@
+<h1 class="text-center">Editar Rastreador</h1>
+<hr>
+    <section class="row">
+
+        <div class="col-md-6 align-self-center">
+            <img src="img/control_panel.svg" width="90%" alt="">
+        </div>
+
+        <div class="col-md-6">
+            <article class="card card-body text-bg-primary">
+                <form action="" method="post" enctype="multipart/form-data">
+                        
+                            <label for="imei" class="form-label">Imei</label>
+                                    <input name="imei" type="text" class="form-control mb-3"  value="<?=$produtosEditar[0];?>" >
+                            <label for="chip" class="form-label">Chip</label>
+                                    <input name="chip" type="text" class="form-control mb-3"  value="<?=$produtosEditar[1];?>">
+                            <label for="modelo" class="form-label">Modelo</label>
+                                    <input name="modelo" type="text" class="form-control mb-3"  value="<?=$produtosEditar[2];?>">
+                            <label for="estado" class="form-label">Estado</label>
+                                <select name="estado" class="form-select" aria-label="Default select example">
+
+                                    <?php                                         
+                                         if($produtosEditar[3]==1){
+                                            $produtosEditar[3]='Novo';
+                                         }else if($produtosEditar[3]==2){
+                                            $produtosEditar[3]='Usado';
+                                         }else{
+                                            $produtosEditar[3]='Em Manutenção';
+                                         }
+                                    ?>
+
+                                    <option selected><?= $produtosEditar[3];?></option>
+                                    <option value="1">Novo</option>
+                                    <option value="2">Usado</option>
+                                    <option value="3">Em Manutenção</option>
+                                </select>
+                            <label  for="foto">Foto</label>
+                                    <input name="foto" type="file" class="form-control mb-3"">    
+
+                            <div class="d-grid">
+                                    <button class="btn btn-outline-light btn-lg ">Atualiza Produto</button>
+                            </div>
+                </form>
+            </article>
+        </div>
+    </section>

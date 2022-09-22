@@ -1,0 +1,28 @@
+<?php
+function uploadFoto(){
+          if(!empty($_POST)){
+
+            $foto = 'img/'.$_FILES['foto']['name'];
+        
+            move_uploaded_file(
+                $_FILES['foto']['tmp_name'],
+                dirname(__DIR__).'/'.$foto
+            );
+        
+           // var_dump($_FILES);
+            
+           /* $titulo = $_POST['titulo'];
+            $descricao = $_POST['descricao'];
+            $preco = $_POST['preco'];
+            $quantidade = $_POST['quantidade'];
+            $foto = $_POST['foto'];
+            */
+             extract($_POST);
+             $arquivo = fopen(dirname(__DIR__).'/bebidas.csv','a+');
+             fwrite($arquivo,"{$titulo};{$descricao};{$preco};{$quantidade};{$foto}".PHP_EOL);
+             fclose($arquivo);
+                 echo "<div class='alert alert-success'> 
+                     <strong>Pronto!!!</strong>Nova Bebida Salva 
+                </div>";
+             }    
+}

@@ -1,0 +1,46 @@
+<h1 class="text-center">Editar de Clientes</h1>
+<hr>
+    <section class="row">
+
+        <div class="col-md-6 align-self-center">
+            <img src="img/control_panel.svg" width="90%" alt="">
+        </div>
+
+        <div class="col-md-6">
+            <article class="card card-body text-bg-primary">
+                <form action="" method="post" enctype="multipart/form-data">
+                        
+                            <label for="nome" class="form-label">Nome</label>
+                                    <input name="nome" type="text" class="form-control mb-3"  value="<?=$clientesParaEditar[0];?>" >
+                            <label for="idade" class="form-label">Idade:</label>
+                                    <input name="idade" type="text" class="form-control mb-3"  value="<?=$clientesParaEditar[1];?>">
+                            <label for="telefone" class="form-label">Telefone:</label>
+                                    <input name="telefone" type="text" class="form-control mb-3"  value="<?=$clientesParaEditar[2];?>">
+                            <label for="sexo" class="form-label">Idade:</label>
+                                <select name="sexo" class="form-select" aria-label="Default select example">
+
+                                    <?php                                         
+                                         if($clientesParaEditar[3]==1){
+                                            $clientesParaEditar[3]='Homem';
+                                         }else if($clientesParaEditar[3]==2){
+                                            $clientesParaEditar[3]='Mulher';
+                                         }else{
+                                            $clientesParaEditar[3]='LGBTQIA+';
+                                         }
+                                    ?>
+
+                                    <option selected><?= $clientesParaEditar[3];?></option>
+                                    <option value="1">Homem</option>
+                                    <option value="2">Mulher</option>
+                                    <option value="3">LGBTQIA+</option>
+                                </select>
+                            <label  for="foto">Foto</label>
+                                    <input name="foto" type="file" class="form-control mb-3"">    
+
+                            <div class="d-grid">
+                                    <button class="btn btn-outline-light btn-lg ">Salvar</button>
+                            </div>
+                </form>
+            </article>
+        </div>
+    </section>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    
+    <title>Grafico de Rastreadores</title>
+</head>
+<body class="container justify-content-center">
+  <h3 class="text-center m-2">Quantidade de Rastreadores Instalados</h3>
+  <hr>
+    <div class="col-md-6 offset-md-3 mt-5">
+        <canvas class="justify-content-center"  id="myChart"></canvas>
+      </div>    
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script> 
+const data = {
+  labels: [
+    'ST-310u',
+    'E3+',
+    'Tk303',
+   
+  ],
+  datasets: [{
+    label: 'Consumo de Bebidas',
+    data: [7, 30, 15,],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'green',      
+      'rgb(255, 205, 86)',      
+      'rgb(54, 162, 235)',
+      'blue',
+      'red',
+      'purple'
+
+    ],
+    hoverOffset: 30
+  }]
+};
+  
+const config = {
+  type: 'pie',
+  data: data,
+  radius:30,
+};
+  </script>
+
+<script>
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+</html>

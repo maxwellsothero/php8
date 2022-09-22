@@ -1,0 +1,42 @@
+<?php
+$id = $_GET['id'];
+
+$editVincular = file(dirname(__DIR__).'/vinculados.csv');
+
+$vincularEditado = explode(';',$editVincular[$id]);
+
+if(!empty($_POST)){
+    $vincularEditado[0] = $_POST['cliente'];
+    $vincularEditado[1] = $_POST['veiculo'];
+    $vincularEditado[2] = $_POST['rastreador'];
+    $vincularEditado[3] = $_POST['categoria'];
+    $vincularEditado[4] = $_POST['observacao'];
+
+    $editVincular[$id] = implode(';', $vincularEditado);
+
+    unlink(dirname(__DIR__).'/vinculados.csv');
+
+    $newVinculado = fopen(dirname(__DIR__).'/vinculados.csv','a+');
+        foreach($editVincular as $editVinculados){
+            fwrite($newVinculado, $editVinculados);
+        }
+        fclose($newVinculado);
+
+    echo "  <div class='alert alert-success'>
+                 Pronto !!! Produto Cadastrado
+            </div>";    
+}
+
+
+
+$clientes = file(dirname(__DIR__).'/clientes.csv');
+   
+
+$veiculos = file(dirname(__DIR__).'/veiculo.csv');
+
+
+$produtos = file(dirname(__DIR__).'/produtos.csv');
+
+   
+
+include dirname(__DIR__).'/paginas/formEditPedido.phtml';

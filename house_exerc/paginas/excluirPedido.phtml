@@ -1,0 +1,19 @@
+<?php
+$id = $_GET['id'];
+
+$vinculadosExcluir = file(dirname(__DIR__).'/vinculados.csv');
+
+//excluir a linha desejada
+unset($vinculadosExcluir[$id]);
+
+unlink(dirname(__DIR__).'/vinculados.csv');
+
+$novoVinculado = fopen(dirname(__DIR__).'/vinculados.csv','a+');
+    foreach($vinculadosExcluir as $cadaVinculado){
+            fwrite($novoVinculado,$cadaVinculado);
+    }
+fclose($novoVinculado);
+
+echo "<div class='alert alert-success'>
+    Pronto!! Usuario Excluido !!!
+</div>";

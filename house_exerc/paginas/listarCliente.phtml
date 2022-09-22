@@ -1,0 +1,83 @@
+<?php
+    $clientes = file(dirname(__DIR__).'/clientes.csv');
+?>
+
+<h3 class=text-center>Lista de Clientes</h3>
+<!-- <table  id="table_id" class=" table table-hover table-striped"> -->
+<table  id="table_id" class=" display" style="width:100%">
+
+
+    <thead >
+    
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Telefone</th>
+            <th>Sexo</th>
+            <th>Foto</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            foreach($clientes as $id => $cadaClientes)
+            {
+                $cadaCliente = explode(';',$cadaClientes);
+                if($cadaCliente[3]==1){
+                    $cadaCliente[3]='Masculino';
+                }else if($cadaCliente[3]==2){
+                    $cadaCliente[3]='Feminino';
+                }else{
+                    $cadaCliente[3]='LGBTQIA+';
+                }
+                echo "
+                    <tr>
+                        <td>$cadaCliente[0]</td>
+                        <td>$cadaCliente[1]</td>
+                        <td>$cadaCliente[2]</td>
+                        <td>$cadaCliente[3]</td>
+                        <td><a onclick=abrirFoto(this) data-image='$cadaCliente[4]' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
+                                <img width='50px' src='{$cadaCliente[4]}'>
+                                 
+                            </a>
+                        </td>
+                        <td>
+                            <a href='/editar-cliente?id={$id}' class='btn btn-outline-warning'>Editar</a>
+                            <a href='/excluir-cliente?id={$id}' class='btn btn-outline-danger'>Excluir</a>
+                        </td>
+                    </tr>
+                ";
+            }
+
+           
+        ?>
+
+    </tbody>
+</table>
+
+<script>
+    function abrirFoto(elemento){
+        foto.setAttribute('src',elemento.getAttribute('data-image'));
+    }
+</script>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="abrirFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img width=100% alt="imagem aqui" id="foto"  src="">
+      </div>
+      
+    </div>
+  </div>
+</div>

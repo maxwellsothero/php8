@@ -1,0 +1,17 @@
+<?php
+$id = $_GET['id'];
+
+$arquivos =  loadFile();
+
+//excluindo a linha especifica do array temporario
+unset($arquivos[$id]);
+//excluiu o arquivo
+removeFile();
+
+$novoArquivo = openFile();
+foreach($arquivos as $cadaLinha){
+    fwrite($novoArquivo,$cadaLinha);
+}
+fclose($novoArquivo);
+
+WebNotification::add('Bebida Excluida');
