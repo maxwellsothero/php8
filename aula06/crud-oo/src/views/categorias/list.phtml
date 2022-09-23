@@ -1,0 +1,29 @@
+<h1 class="text-center">Listar categoria</h1>
+
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>            
+            <th>Ações</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            foreach($categories as $cat){
+                echo "<tr>
+                <td>{$cat->id}</td>
+                <td>{$cat->name}</td>
+                <td>
+                    <a href='/editar-bebida?id={$cat->id}' class='btn btn-primary'>Editar</a>
+                    <a href='/categorias/excluir?id={$cat->id}' class='btn btn-danger'>remover</a>
+                </td>
+                </tr>";
+            }
+        ?>
+       
+        
+    </tbody>
+</table>
