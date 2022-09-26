@@ -1,8 +1,3 @@
-<?php
-
-        //no dirname(__dir),2 e como se repetisse 2 vezes
-    $bebidas = loadFile();
-?>
 
 <h1>Pagina de Listagem</h1>
 
@@ -19,21 +14,21 @@
     </thead>
     <tbody>
         <?php
-        foreach($bebidas as $id => $cadaLinha){
-            $cadaBebida = explode(';',$cadaLinha);
+        foreach($bebidas as $cadaBebida){                     
             echo "
             <tr>
-                <td>{$cadaBebida[0]}</td>
-                <td>{$cadaBebida[1]}</td>
-                <td>{$cadaBebida[2]}</td>
-                <td>{$cadaBebida[3]}</td>
-                <td><a onclick=abrirFoto(this) data-image='$cadaBebida[4]' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
-                    <img width='50px' src='{$cadaBebida[4]}'>
+                <td>{$cadaBebida->titulo}</td>
+                <td>{$cadaBebida->descricao}</td>
+                <td>{$cadaBebida->preco}</td>
+                <td>{$cadaBebida->quantidade}</td>
+                <td><a onclick=abrirFoto(this) data-image='$cadaBebida->foto' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
+                    <img width='50px' src='{$cadaBebida->foto}'>
                     </a>
                 </td>
                 <td>
-                    <a href='/editar-bebida?id={$id}' class='btn btn-primary'>Editar</a>
-                    <a href='/excluir-bebida?id={$id}' class='btn btn-danger'>remover</a>
+                    <a href='/bebidas/editar?id={$cadaBebida->id}' class='btn btn-primary'>Editar</a>
+                    
+                    <a  class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#excluirBebida'>remover</a>
                 </td>
             </tr>
             ";
@@ -65,6 +60,28 @@
         <img width=100% alt="imagem aqui" id="foto"  src="">
       </div>
       
+    </div>
+  </div>
+</div>
+
+<!-- Modal de exclusão -->
+
+
+<div class="modal fade" id="excluirBebida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exclusão De Categoria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Deseja Realmente Excluir esta Bebida ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a class="btn btn-danger btn-xs" href="/bebidas/excluir?id=<?=$cadaBebida->id;?>" data-toggle="modal"   data-target="#excluirCategoria">Excluir</a>
+            
+    </div>
     </div>
   </div>
 </div>

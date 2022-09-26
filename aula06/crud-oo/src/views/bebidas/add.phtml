@@ -1,30 +1,5 @@
-<?php 
-if(!empty($_POST)){
 
-    $foto = 'img/'.$_FILES['foto']['name'];
-
-    move_uploaded_file(
-        $_FILES['foto']['tmp_name'],
-        dirname(__DIR__,3).'/public/'.$foto
-    );
-
-   // var_dump($_FILES);
-    
-   /* $titulo = $_POST['titulo'];
-    $descricao = $_POST['descricao'];
-    $preco = $_POST['preco'];
-    $quantidade = $_POST['quantidade'];
-    $foto = $_POST['foto'];
-    */
-     extract($_POST);
-     $arquivo = openFile();
-     fwrite($arquivo,"{$titulo};{$descricao};{$preco};{$quantidade};{$foto}".PHP_EOL);
-     fclose($arquivo);
-     WebNotification::add('Bebida adicionada');
-     }
-?>
-
-<h1 class="te">Pagina de cadastro</h1>
+<h1 class="text-center">Pagina de cadastro</h1>
 
 <section class="row">
     <div class="col">

@@ -15,10 +15,14 @@ function render(string $filename, array $data=[]): void
 
 match($url[0]){
     '/' => render('home'),
-    '/nova-bebida' => render('bebidas/add'),
-    '/listar-bebidas' => render('bebidas/listar'),
-    '/excluir-bebida' => render('bebidas/excluir'),
-    '/editar-bebida' => render('bebidas/editar'),
+    '/bebidas/listar' => (new BebidasController())->list(),
+    '/bebidas/nova'   => (new BebidasController())->add(),
+    '/bebidas/excluir'   => (new BebidasController())->del(),
+    '/bebidas/editar'   => (new BebidasController())->edit(),
+
+    //'/nova-bebida' => render('bebidas/add'),    
+    //'/excluir-bebida' => render('bebidas/excluir'),
+    //'/editar-bebida' =>  render('bebidas/editar'),
 
     // '/categorias/listar' => render('categorias/list'),
       // '/categorias/adicionar' => render('categorias/add'),

@@ -6,18 +6,24 @@
 
     </div>
 
+        <?php
+            foreach($bebidaParaEditar as $bebida){
+
+            }
+        ?>
+
     <div class="col">
         <article class=" card card-body text-bg-dark">
 
         <form action="" method="post" enctype="multipart/form-data">
             <label for="titulo">Título</label>
-                <input value="<?=$bebidaParaEditar[0];?>" name="titulo" type="text" class="form-control mb-3">
+                <input value="<?=$bebida->titulo;?>" name="titulo" type="text" class="form-control mb-3">
             <label for="descricao">Descrição</label>
-                <input value="<?=$bebidaParaEditar[1];?>"  name="descricao" type="text" class="form-control mb-3"">    
+                <input value="<?=$bebida->descricao;?>"  name="descricao" type="text" class="form-control mb-3"">    
             <label for="preco">Preço</label>
-                <input value="<?=$bebidaParaEditar[2];?>" name="preco" type="number" step="0.01" class="form-control mb-3"">    
+                <input value="<?=$bebida->preco;?>" name="preco" type="number" step="0.01" class="form-control mb-3"">    
             <label for="quantidade">Quantidade</label>
-                <input value="<?=$bebidaParaEditar[3];?>" name="quantidade" min="0" type="number" class="form-control mb-3"">
+                <input value="<?=$bebida->quantidade;?>" name="quantidade" min="0" type="number" class="form-control mb-3"">
 
             <label  for="foto">Foto</label>
                 <input name="foto" type="file" class="form-control mb-3"">

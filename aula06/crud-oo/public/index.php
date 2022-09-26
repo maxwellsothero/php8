@@ -6,6 +6,7 @@
         require dirname(__DIR__).'/src/Connection/DatabaseConnection.php';
         include dirname(__DIR__).'/src/Notification/Webnotification.php';    
         include  dirname(__DIR__).'/src/Controller/CategoryController.php';
+        include  dirname(__DIR__).'/src/Controller/BebidasController.php';
 
         include dirname(__DIR__).'/config/env.php' ;  
         include dirname(__DIR__).'/config/routes.php' ;      
