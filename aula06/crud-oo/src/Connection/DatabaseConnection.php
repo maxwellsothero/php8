@@ -7,7 +7,7 @@ class DatabaseConnection
     {
         $host = 'localhost'; //http://db.site.com
         $user =  'root';
-        $pass = 'maxwell123';
+        $pass = 'maxwell1983';
         $db_name = 'db_iw_bebidas';
 
         $dns = "mysql:host={$host};dbname={$db_name}";

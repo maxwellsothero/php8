@@ -1,0 +1,33 @@
+<h1 class="te">Edição de Categorias</h1>
+
+<section class="row">
+    <div class="col">
+      <img width="90%" src="img/add.svg" alt="">
+
+    </div>
+
+    <div class="col">
+        <article class=" card card-body text-bg-dark">
+
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <?php
+                foreach($categories as $cat){
+                                  
+                }
+            ?>
+            
+            <label for="name">Titulo</label>
+                <input value="<?=$cat->name;?>"  name="name" type="text" class="form-control mb-3"">
+        
+
+               <div class="d-grid">
+                     <button class="btn btn-outline-light btn-lg ">Salvar</button>
+               </div>
+
+        </form>
+
+        </article>
+
+    </div>
+</section>

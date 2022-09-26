@@ -17,8 +17,8 @@
                 <td>{$cat->id}</td>
                 <td>{$cat->name}</td>
                 <td>
-                    <a href='/editar-bebida?id={$cat->id}' class='btn btn-primary'>Editar</a>
-                    <a href='/categorias/excluir?id={$cat->id}' class='btn btn-danger'>remover</a>
+                    <a href='/categorias/editar?id={$cat->id}' class='btn btn-primary text-'>Editar</a>
+                    <a  class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#excluirCategoria'>remover</a>
                 </td>
                 </tr>";
             }
@@ -27,3 +27,26 @@
         
     </tbody>
 </table>
+
+
+
+<div class="modal fade" id="excluirCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exclusão De Categoria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Deseja Realmente Excluir esta Categoria ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a class="btn btn-danger btn-xs" href="/categorias/excluir?id=<?= $cat->id;?> " data-toggle="modal"   data-target="#excluirCategoria">Excluir</a>
+
+    </div>
+    </div>
+  </div>
+</div>
+
+
