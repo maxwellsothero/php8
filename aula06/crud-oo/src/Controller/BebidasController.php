@@ -22,19 +22,20 @@ class BebidasController{
             render('bebidas/add');
             return;
         }        
-        $titulo = $_POST['titulo'];
-        $descricao = $_POST['descricao'];
-        $preco = $_POST['preco'];
-        $quantidade = $_POST['quantidade'];
+            $titulo = $_POST['titulo'];
+            $descricao = $_POST['descricao'];
+            $preco = $_POST['preco'];
+            $quantidade = $_POST['quantidade'];
 
-        $foto = $_FILES['foto'];
-        $caminhoImg ="img/".$foto["name"];
-        move_uploaded_file($foto["tmp_name"], $caminhoImg);      
+            $foto = $_FILES['foto'];
+            $caminhoImg ="img/".$foto["name"];
+            move_uploaded_file($foto["tmp_name"], $caminhoImg);      
 
-        $query = "INSERT INTO tb_bebidas(titulo,descricao,preco,quantidade,foto) VALUES ('$titulo','$descricao','$preco','$quantidade','$caminhoImg');";    
-        $pdo = DatabaseConnection::open();
-        $pdo->query($query);
-        WebNotification::add('bebida Adicionada');    
+            $query = "INSERT INTO tb_bebidas(titulo,descricao,preco,quantidade,foto) VALUES ('$titulo','$descricao','$preco','$quantidade','$caminhoImg');";    
+            $pdo = DatabaseConnection::open();
+            $pdo->query($query);
+
+        WebNotification::add('Bebida Adicionada');    
         header("Refresh:1;url=/bebidas/listar"); 
         //header("location:/bebidas/listar");  
     }
@@ -47,7 +48,7 @@ class BebidasController{
         $pdo = DatabaseConnection::open();
         $pdo->query($query);
         
-        WebNotification::add('Bebida Excluida');
+        WebNotification::del('Bebida Excluida');
         header("Refresh:1;url=/bebidas/listar");         
     }
 
@@ -72,7 +73,7 @@ class BebidasController{
                 $query = "UPDATE tb_bebidas SET titulo='$titulo',descricao='$descricao',preco='$preco',quantidade='$quantidade' WHERE id='$id';";
                 $pdo = DatabaseConnection::open();
                 $pdo->query($query);
-                WebNotification::add('BeBida Editada'); 
+                WebNotification::edit('BeBida Editada'); 
                 header("Refresh:1;url=/categorias/listar");
                 //header("location:/categorias/listar");  
         }

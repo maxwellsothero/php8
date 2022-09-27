@@ -9,6 +9,22 @@ class WebNotification
             'title'=>$title,
                 ]);
     }
+
+    public static function del(string $title, string $type ='danger'): void
+    {
+        render('_components/notification',[
+            'type' =>$type,
+            'title'=>$title,
+                ]);
+    }
+
+    public static function edit(string $title, string $type ='warning'): void
+    {
+        render('_components/notification',[
+            'type' =>$type,
+            'title'=>$title,
+                ]);
+    }
 }
 
    

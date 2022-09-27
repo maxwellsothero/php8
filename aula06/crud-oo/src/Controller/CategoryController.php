@@ -31,8 +31,9 @@ class CategoryController
             $pdo = DatabaseConnection::open();
             $pdo->query($query);
 
-        WebNotification::add('Categoria Adicionada');     
-        header("location:/categorias/listar");  
+        WebNotification::add('Categoria Adicionada');  
+        header("Refresh:1;url=/categorias/listar");   
+         
     }
 
     public function del():void 
@@ -43,9 +44,9 @@ class CategoryController
             $pdo = DatabaseConnection::open();
             $pdo->query($query);      
             
-            WebNotification::add('Bebida Excluida');
-           
-           header("location:/categorias/listar");      
+            WebNotification::del('Categoria Excluida');
+                       
+           header("Refresh:1;url=/categorias/listar");   
     }
 
     public function edit():void
@@ -69,8 +70,8 @@ class CategoryController
                 $query = "UPDATE tb_category SET name=('{$name}') WHERE id=$id;";
                 $pdo = DatabaseConnection::open();
                 $pdo->query($query);
-                WebNotification::add('Categoria Adicionada');     
-                header("location:/categorias/listar");    
+                WebNotification::edit('Categoria Editada com Sucesso !!!');     
+                header("Refresh:1;url=/categorias/listar");     
                 }
    }
 }
