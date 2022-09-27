@@ -26,9 +26,12 @@ class BebidasController{
         $descricao = $_POST['descricao'];
         $preco = $_POST['preco'];
         $quantidade = $_POST['quantidade'];
-        $foto = $_POST['foto'];
 
-        $query = "INSERT INTO tb_bebidas(titulo,descricao,preco,quantidade,foto) VALUES ('$titulo','$descricao','$preco','$quantidade','$foto');";    
+        $foto = $_FILES['foto'];
+        $caminhoImg ="img/".$foto["name"];
+        move_uploaded_file($foto["tmp_name"], $caminhoImg);      
+
+        $query = "INSERT INTO tb_bebidas(titulo,descricao,preco,quantidade,foto) VALUES ('$titulo','$descricao','$preco','$quantidade','$caminhoImg');";    
         $pdo = DatabaseConnection::open();
         $pdo->query($query);
         WebNotification::add('bebida Adicionada');    
@@ -43,23 +46,21 @@ class BebidasController{
         $query = "DELETE FROM tb_bebidas WHERE id=('{$id}')";
         $pdo = DatabaseConnection::open();
         $pdo->query($query);
-        WebNotification::add('Bebida Excluida');
-        header("Refresh:1;url=/bebidas/listar"); 
         
+        WebNotification::add('Bebida Excluida');
+        header("Refresh:1;url=/bebidas/listar");         
     }
 
     public function edit():void 
     {
         $id = $_GET['id'];
-
             $query = "SELECT * FROM tb_bebidas WHERE id= $id;";
             $pdo =DatabaseConnection::open();
             $result= $pdo->query($query);
             $result->execute();
-
-            $bebidaParaEditar = $result->fetchAll(PDO::FETCH_OBJ);
-            render('bebidas/form_edit',[
-                'bebidaParaEditar'=>$bebidaParaEditar,
+                $bebidaParaEditar = $result->fetchAll(PDO::FETCH_OBJ);
+                render('bebidas/form_edit',[
+                    'bebidaParaEditar'=>$bebidaParaEditar,
         ]);
 
         if(!empty($_POST)){

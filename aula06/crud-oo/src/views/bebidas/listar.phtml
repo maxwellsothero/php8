@@ -21,14 +21,14 @@
                 <td>{$cadaBebida->descricao}</td>
                 <td>{$cadaBebida->preco}</td>
                 <td>{$cadaBebida->quantidade}</td>
-                <td><a onclick=abrirFoto(this) data-image='$cadaBebida->foto' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
-                    <img width='50px' src='{$cadaBebida->foto}'>
+                <td>
+                    <a onclick=abrirFoto(this) data-image='/../$cadaBebida->foto' href='#' data-bs-toggle='modal' data-bs-target='#abrirFoto'>
+                         <img width='50px' src='/../{$cadaBebida->foto}'>
                     </a>
                 </td>
                 <td>
-                    <a href='/bebidas/editar?id={$cadaBebida->id}' class='btn btn-primary'>Editar</a>
-                    
-                    <a  class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#excluirBebida'>remover</a>
+                    <a href='/bebidas/editar?id={$cadaBebida->id}' class='btn btn-primary'>Editar</a>                    
+                    <a class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#excluirBebida'>remover</a>
                 </td>
             </tr>
             ";
